@@ -16,24 +16,39 @@ A React Native mobile application for chefs to manage their restaurant menu. Thi
 - **Language**: TypeScript
 - **Styling**: React Native StyleSheet
 
-  ## Project Requirements Met
-  ✅ Add Menu Item screen with TextInput + Button  
-✅ Home Screen displaying menu items in FlatList  
-✅ Filter by Course (Starter, Main, Dessert)  
-✅ Navigation between screens using React Navigation  
-✅ Consistent look & feel (colors, fonts, spacing)  
-✅ Total number of menu items displayed
+  ## Usage
+ 1. View Menu: "Launch app to see the home screen with all menu items.
+ 2. Add Item: Tap "Add New Dish" to navigate to the add form.
+ 3. Filter: Use course button to filter the menu list.
+ 4. Navigate: Use header back button or in-app navigation.
 
 ## Project Structure 
-Part2/
-├── src/
-│ ├── screens/
-│ │ ├── HomeScreen.tsx
-│ │ └── AddMenuItemScreen.tsx
-│ └── types/
-│ └── types.ts
-├── App.tsx
-├── package.json
-└── tsconfig.json
+# Part2/
+* ├── src/
+* │ ├── screens/
+* │ │ ├── HomeScreen.tsx
+* │ │ └── AddMenuItemScreen.tsx
+* │ └── types/
+* │ └── types.ts
+* ├── App.tsx
+* ├── package.json
+* └── tsconfig.json
 
-## App Screenshots
+## App Screenshots 
+* [<img width="1470" height="866" alt="homepage" src="https://github.com/user-attachments/assets/6966c54d-772f-44a7-8a00-c29283a6b44d" />] The Home page Screen.
+
+** ![<img width="1476" height="861" alt="Additem page" src="https://github.com/user-attachments/assets/d18623ce-5b94-4991-9f3a-069f26ec9f41" />] AddItem screen.
+
+## GitHub link
+* The Link: https://github.com/Soraya2005/Mast-Part2.git
+
+## Youtube link
+* The link:
+* The youtube video shows how the application works.
+
+## Student details
+* Full Name: Soraya Iness Pechera Rogombe
+* Student No: ST10493837
+* Module: Mobile App Scripting / Mast5112
+
+
