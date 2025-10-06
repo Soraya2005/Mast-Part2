@@ -43,7 +43,7 @@ A React Native mobile application for chefs to manage their restaurant menu. Thi
 * The Link: https://github.com/Soraya2005/Mast-Part2.git
 
 ## Youtube link
-* The link:
+* The link:https://youtu.be/mEG-KNwMA0g?si=AP5y_KyP4cctGhMF
 * The youtube video shows how the application works.
 
 ## Student details
