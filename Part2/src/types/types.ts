@@ -5,5 +5,12 @@ export interface MenuItem {
   name: string;
   description: string;
   course: CourseType;
-  price: string;
+  price: number; 
+}
+
+export interface PriceStatistics {
+  starter: number;
+  main: number;
+  dessert: number;
+  overall: number;
 }

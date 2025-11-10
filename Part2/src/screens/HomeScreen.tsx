@@ -1,153 +1,69 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { MenuItem, CourseType } from '../types/types';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { MenuItem } from '../types/types';
+import { calculateAveragePrices } from '../utils/calculations';
 
 interface HomeScreenProps {
   menuItems: MenuItem[];
-  onAddItem: () => void;
+  onNavigateToManage: () => void;
+  onNavigateToGuest: () => void;
 }
 
-export default function HomeScreen({ menuItems, onAddItem }: HomeScreenProps) {
-  const [filter, setFilter] = useState<CourseType | 'all'>('all');
-
-  const filteredItems = filter === 'all' 
-    ? menuItems 
-    : menuItems.filter(item => item.course === filter);
-
-  const getCourseLabel = (course: CourseType) => {
-    switch(course) {
-      case 'starter': return 'Starter';
-      case 'main': return 'Main Course';
-      case 'dessert': return 'Dessert';
-    }
-  };
+export default function HomeScreen({ menuItems, onNavigateToManage, onNavigateToGuest }: HomeScreenProps) {
+  const stats = calculateAveragePrices(menuItems);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Chef's Menu</Text>
-      <Text style={styles.subtitle}>Total items: {menuItems.length}</Text>
-      
-      {/* Filter Buttons */}
-      <View style={styles.filterContainer}>
-        {(['all', 'starter', 'main', 'dessert'] as const).map(course => (
-          <TouchableOpacity
-            key={course}
-            style={[styles.filterButton, filter === course && styles.filterButtonActive]}
-            onPress={() => setFilter(course)}
-          >
-            <Text style={styles.filterButtonText}>
-              {course === 'all' ? 'All' : getCourseLabel(course)}
-            </Text>
-          </TouchableOpacity>
-        ))}
+      <Text style={styles.title}>Chef's Kitchen</Text>
+      <Text style={styles.subtitle}>Total Menu Items: {menuItems.length}</Text>
+
+      {/* Average Prices */}
+      <View style={styles.statsContainer}>
+        <Text style={styles.statsTitle}>Average Prices</Text>
+        <View style={styles.statsRow}>
+          <Text style={styles.stat}>Starters: ${stats.starter.toFixed(2)}</Text>
+          <Text style={styles.stat}>Mains: ${stats.main.toFixed(2)}</Text>
+          <Text style={styles.stat}>Desserts: ${stats.dessert.toFixed(2)}</Text>
+        </View>
+        <Text style={styles.overallStat}>Overall Average: ${stats.overall.toFixed(2)}</Text>
       </View>
 
-      {/* Menu Items List */}
-      <FlatList
-        data={filteredItems}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.menuItem}>
-            <Text style={styles.itemName}>{item.name}</Text>
-            <Text style={styles.itemDescription}>{item.description}</Text>
-            <View style={styles.itemDetails}>
-              <Text style={styles.itemCourse}>{getCourseLabel(item.course)}</Text>
-              <Text style={styles.itemPrice}>${item.price}</Text>
-            </View>
-          </View>
-        )}
-      />
-
-      {/* Add Item Button */}
-      <TouchableOpacity style={styles.addButton} onPress={onAddItem}>
-        <Text style={styles.addButtonText}>+ Add New Dish</Text>
-      </TouchableOpacity>
+      {/* Navigation Buttons */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={[styles.button, styles.manageButton]} onPress={onNavigateToManage}>
+          <Text style={styles.buttonText}>Manage Menu</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={[styles.button, styles.guestButton]} onPress={onNavigateToGuest}>
+          <Text style={styles.buttonText}>Guest View</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 20, 
-    backgroundColor: '#f8f9fa' 
-  },
-  title: { 
-    fontSize: 28, 
-    fontWeight: 'bold', 
-    textAlign: 'center', 
-    marginBottom: 10,
-    color: '#2c3e50'
-  },
-  subtitle: { 
-    fontSize: 16, 
-    textAlign: 'center', 
-    marginBottom: 20, 
-    color: '#7f8c8d' 
-  },
-  filterContainer: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-around', 
-    marginBottom: 20 
-  },
-  filterButton: { 
-    padding: 10, 
-    borderRadius: 20, 
-    backgroundColor: '#ecf0f1' 
-  },
-  filterButtonActive: { 
-    backgroundColor: '#3498db' 
-  },
-  filterButtonText: { 
-    color: '#2c3e50', 
-    fontWeight: 'bold' 
-  },
-  menuItem: { 
+  container: { flex: 1, padding: 20, backgroundColor: '#f8f9fa' },
+  title: { fontSize: 28, fontWeight: 'bold', textAlign: 'center', marginBottom: 10, color: '#212529' },
+  subtitle: { fontSize: 16, textAlign: 'center', marginBottom: 30, color: '#6c757d' },
+  statsContainer: { 
     backgroundColor: 'white', 
-    padding: 15, 
-    marginBottom: 10, 
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  itemName: { 
-    fontSize: 18, 
-    fontWeight: 'bold', 
-    color: '#2c3e50' 
-  },
-  itemDescription: { 
-    fontSize: 14, 
-    color: '#7f8c8d', 
-    marginTop: 5 
-  },
-  itemDetails: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    marginTop: 10 
-  },
-  itemCourse: { 
-    fontSize: 12, 
-    color: '#95a5a6', 
-    fontStyle: 'italic' 
-  },
-  itemPrice: { 
-    fontSize: 16, 
-    fontWeight: 'bold', 
-    color: '#27ae60' 
-  },
-  addButton: { 
-    backgroundColor: '#3498db', 
-    padding: 15, 
+    padding: 20, 
     borderRadius: 10, 
-    alignItems: 'center', 
-    marginTop: 20 
+    marginBottom: 30, 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.1, 
+    shadowRadius: 4, 
+    elevation: 2 
   },
-  addButtonText: { 
-    color: 'white', 
-    fontSize: 16, 
-    fontWeight: 'bold' 
-  },
+  statsTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 15, textAlign: 'center', color: '#495057' },
+  statsRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 },
+  stat: { fontSize: 14, color: '#6c757d' },
+  overallStat: { fontSize: 16, fontWeight: 'bold', textAlign: 'center', color: '#28a745', marginTop: 10 },
+  buttonContainer: { marginTop: 20 },
+  button: { padding: 15, borderRadius: 8, alignItems: 'center', marginBottom: 15 },
+  manageButton: { backgroundColor: '#007bff' },
+  guestButton: { backgroundColor: '#28a745' },
+  buttonText: { color: 'white', fontSize: 16, fontWeight: 'bold' }
 });
