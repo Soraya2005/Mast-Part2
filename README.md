@@ -46,6 +46,79 @@ A React Native mobile application for chefs to manage their restaurant menu. Thi
 * The link:https://youtu.be/mEG-KNwMA0g?si=AP5y_KyP4cctGhMF
 * The youtube video shows how the application works.
 
+## Part 3 (Final submission)
+
+### Additional Features Implemented
+- **Manage Menu Screen**: Separate Screen for adding/removing menu items
+- **Average Price Calculation**: Automatic Calculation and display of average prices per course
+- **Guest View Screen**: Dedicated screen for guests with filtering capabilities
+- **Delete Functionality**: Ability to remove menu items with confirmation
+
+### Technical Improvements
+- **Code Refactoring**: Better file organization with utils/ folder
+- **Type Safety**: Enhance TypeScript interfaces
+- **State Management**: Improved data flow and immutability
+
+## Change Log
+# Changelog - Part 3 to Final PoE
+
+## New Features Added
+
+### 1. Separate Manage Menu Screen
+- Moved add/remove functionality from home screen to dedicated screen
+- Added ability to delete menu items with confirmation dialog
+- Improved user experience for menu management
+
+### 2. Average Price Calculation
+- Automatic calculation of average prices per course (starter, main, dessert)
+- Display of average prices on home screen
+- Overall average price calculation
+- Real-time updates when menu changes
+
+### 3. Guest View Screen
+- Separate screen designed for guests
+- Filtering by course type (All, Starters, Mains, Desserts)
+- Clean, simple interface without management features
+- Item count display for each filter
+
+### 4. Enhanced Data Structure
+- Changed price from string to number type for calculations
+- Added PriceStatistics interface for type safety
+- Improved data consistency
+
+## Code Refactoring Improvements
+
+### 1. File Structure Organization
+- Created `utils/` folder for utility functions
+- Better separation of concerns
+- More maintainable code structure
+
+### 2. Utility Functions
+- `calculateAveragePrices()` function for statistical calculations
+- Modular and reusable code
+- Centralized business logic
+
+### 3. Component Organization
+- Each screen has single responsibility
+- HomeScreen: Display and navigation
+- ManageMenuScreen: Add/remove functionality  
+- GuestScreen: Filtering and display
+- Better props interfaces and type safety
+
+### 4. State Management
+- Centralized menu items state in App.tsx
+- Proper add/remove functionality with immutability
+- Efficient re-rendering and state updates
+
+## Bug Fixes and Improvements
+- Fixed price calculation accuracy
+- Improved error handling with user alerts
+- Better user feedback for actions
+- Enhanced navigation flow
+
+##Youtube link 
+* This is the new link for the final version: https://youtu.be/XMsSVG7M-bU?si=mthmRyouflAGqQo9
+
 ## Student details
 * Full Name: Soraya Iness Pechera Rogombe
 * Student No: ST10493837
